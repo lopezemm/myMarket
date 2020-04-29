@@ -30,10 +30,11 @@ import { AddproductComponent } from './addproduct/addproduct.component';
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: SalesComponent },
+      { path: '', component: SalesComponent },      
       { path: 'products', component: ProductsComponent },
       { path: 'admin', component: AdminComponent },
-      { path: 'products/add', component: AddproductComponent}
+      { path: 'products/product/add', component: AddproductComponent},
+      
     ])
   ],
   providers: [ProductServiceService],

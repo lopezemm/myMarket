@@ -1,11 +1,13 @@
 <form #f="ngForm" (ngSubmit)= save(f.value) >
     <div class="form-group">
         <label for="codigo">Codigo: </label>
-        <input ngModel name="codigo" id="codigo" type= "text" class = "form-control" (keyup.enter)="onKey($event)">                
+        <input #code="ngModel" ngModel name="codigo" id="codigo" type= "text" class = "form-control" (keyup.enter)="onKeyUp($event.target.value)" required>                
+        <div class="alert alert-danger" *ngIf="code.touched && code.invalid">El codigo es requerido</div>
     </div>
     <div class="form-group">
         <label for="nombre">Nombre producto: </label>
-        <input ngModel name="nombre" id="nombre" type= "text" class = "form-control">                
+        <input #name="ngModel" ngModel name="nombre" id="nombre" type= "text" class = "form-control" required>                 
+        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">El nombre es requerido</div>
     </div>
     <div class="form-group">
         <label for="desc">Descripcion producto: </label>
@@ -15,8 +17,9 @@
         <label for="precio">Precio producto: </label>
         <div class="input-group" >
             <span class="input-group-text">$</span>
-            <input ngModel name="precio" id="precio" type= "text" class = "form-control">                
+            <input #price="ngModel" ngModel name="precio" id="precio" type= "text" class = "form-control" required>                
         </div>
+        <div class="alert alert-danger" *ngIf="price.touched && price.invalid">El precio es requerido</div>
     </div>
     <div class="form-group">
         <label for="precioCom">Precio compra: </label>
@@ -25,5 +28,5 @@
             <input ngModel name="precioCom" id="precioCom" type= "text" class = "form-control">                
         </div>    
     </div>    
-    <button class="btn btn-primary"  [disabled]="addProdFlag">Guardar</button>
+    <button class="btn btn-primary"  [disabled]="f.invalid">Guardar</button>
 </form>
