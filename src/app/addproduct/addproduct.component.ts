@@ -14,7 +14,7 @@ export class AddproductComponent implements OnInit {
   }
 
   onKeyUp(event: KeyboardEvent) {
-    //nada
+    
   }
 
   save(product){    
