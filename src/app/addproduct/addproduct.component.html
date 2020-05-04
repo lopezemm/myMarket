@@ -29,4 +29,6 @@
         </div>    
     </div>    
     <button class="btn btn-primary"  [disabled]="f.invalid">Guardar</button>
+    <div *ngIf="statusOk"><h4>El producto se guardo con exito</h4></div>    
+    <div *ngIf="statusError"><h4>Se produjo un error</h4></div>   
 </form>

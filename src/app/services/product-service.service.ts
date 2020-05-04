@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 
+const headers = {'Content-Type':  'application/json'};
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductServiceService {
   productUrl = 'http://localhost:8080/';
+  
 
   constructor(private http: HttpClient) {
   }
@@ -16,7 +20,7 @@ export class ProductServiceService {
   }
 
   addProduct(product){
-    return this.http.post(this.productUrl + 'addProdcut', product);
+    return this.http.post(this.productUrl + 'addProduct', product, { headers });
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductServiceService } from '../services/product-service.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Form } from '@angular/forms';
 
 @Component({
   selector: 'app-addproduct',
@@ -9,6 +9,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class AddproductComponent implements OnInit {  
   
+  statusOk : boolean;
+  statusError : boolean;
   constructor(private productService: ProductServiceService) { }
 
   ngOnInit(): void {
@@ -18,8 +20,16 @@ export class AddproductComponent implements OnInit {
     //adfassdf
   }
 
-  save(product){    
-    this.productService.addProduct(product);
+  async save(product : Form){    
+    this.productService.addProduct(product).subscribe((result: any) => {            
+      alert(result.message);
+      (result.message && result.message=='ok') ? this.statusOk =true : this.statusOk =false;
+      
+    }, (err) => {
+      this.statusOk = false;
+      this.statusError = true;
+      console.log(err);           
+    });
     console.log(product);
 
   }
