@@ -1,13 +1,39 @@
 <form>
-    <div >
-        <h1>Buscar por:</h1>
-        <div>  
-            <label for="code">Codigo de Barra: </label>
-            <input ngModel name="code" id="code" type= "text" class = "form-control">        
+    <div class = "row">
+        <div class = "col-4" >
+            <h1>Buscar por:</h1>        
+            <div>  
+                <label for="code">Codigo de Barras: </label>
+                <input ngModel name="code" id="code" type= "text" class = "form-control">        
+            </div>
+            <div>
+                <label for="name">Nombre Producto: </label>
+                <input ngModel name="name" id="name" type= "text" class = "form-control">         
+            </div>
         </div>
-        <div>
-            <label for="name">Nombre Producto: </label>
-            <input ngModel name="name" id="name" type= "text" class = "form-control">         
-        </div>
-    </div>
+        <div class = "col-2" ></div>
+        <div class= "col">
+            <h1>Producto</h1>        
+            <div>  
+                <label><strong>Nombre: </strong></label><br>
+                <label>papas fritas</label>
+            </div>
+            <div>  
+                <label><strong>Precio: </strong></label><br>
+                <label>{{15.00 | currency}}</label>
+            </div>
+            <div>  
+                <label><strong>Precio Venta: </strong></label><br>
+                <label>{{18.00 | currency}}</label>
+            </div>
+            <div>  
+                <label><strong>Cantidad disponible: </strong></label><br>
+                <label>{{5}}</label>
+            </div>
+            <div>  
+                <label><strong>Fecha ultimo surtido de producto: </strong></label><br>
+                <label>{{ today | date:'full':'h:mm a mx'}}</label>
+            </div>
+        </div>    
+    </div>    
 </form>

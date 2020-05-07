@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-delete-product',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./delete-product.component.css']
 })
 export class DeleteProductComponent implements OnInit {
-
+  today: number = Date.now();
+  
   constructor() { }
 
   ngOnInit(): void {
