@@ -13,6 +13,7 @@ export class SalesComponent implements OnInit  {
   getBarcodeValue = "";
   price = 0;
   total = 0;
+  name : String;
   
 
   constructor(private changeDetector: ChangeDetectorRef, 
@@ -50,8 +51,9 @@ export class SalesComponent implements OnInit  {
     let value = this.productService.getProduct(this.getBarcodeValue)
       .subscribe((response: any) => {
         //response = JSON.stringify(response);
-        console.log(response.hasOwnProperty("price"));
+        console.log(JSON.stringify(response));
         this.price = response.price;
+        this.name = response.product_name;
         this.total += this.price;
         //this.product = response;
         //console.log('aqui esta el valor: ' + this.product);
