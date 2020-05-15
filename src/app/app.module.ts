@@ -13,6 +13,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ProductServiceService } from './services/product-service.service';
 import { ManageproductsComponent } from './manageproducts/manageproducts.component';
 import { AddproductComponent } from './addproduct/addproduct.component';
+import { DeleteProductComponent } from './delete-product/delete-product.component';
 
 @NgModule({
   declarations: [
@@ -23,17 +24,20 @@ import { AddproductComponent } from './addproduct/addproduct.component';
     WarehouseComponent,
     AdminComponent,
     ManageproductsComponent,
-    AddproductComponent
+    AddproductComponent,
+    DeleteProductComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: SalesComponent },
+      { path: '', component: SalesComponent },      
       { path: 'products', component: ProductsComponent },
       { path: 'admin', component: AdminComponent },
-      { path: 'products/add', component: AddproductComponent}
+      { path: 'products/product/add', component: AddproductComponent},
+      { path: 'products/product/del', component: DeleteProductComponent},
+      
     ])
   ],
   providers: [ProductServiceService],

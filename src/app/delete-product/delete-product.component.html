@@ -1,0 +1,47 @@
+<form>
+    <div class = "row">
+        <div class = "col-4" >
+            <h1>Buscar por:</h1>        
+            <div>  
+                <label for="code">Codigo de Barras: </label>
+                <input ngModel [(ngModel)]="barcode" name="code" id="code" type= "text" class = "form-control">        
+            </div>
+            <div>
+                <label for="name">Nombre Producto: </label>
+                <input ngModel [(ngModel)]="prodName" name="name" id="name" type= "text" class = "form-control">         
+            </div>
+            <br>
+            <div>
+                <button class="btn btn-primary" (click)="deleleProd()" [disabled] = "prodReturn" style="margin-right: 30px">Borrar</button>
+           
+                <button class="btn btn-primary"  (click)="findService()">Buscar</button>
+                <br>
+                <h3 *ngIf="success"> El producto se borro con exito</h3>
+            </div>
+        </div>
+        <div class = "col-2" ></div>
+        <div class= "col">
+            <h1>Producto</h1>        
+            <div>  
+                <label><strong>Nombre: </strong></label><br>
+                <label>{{ product.product_name }}</label>
+            </div>
+            <div>  
+                <label><strong>Precio: </strong></label><br>
+                <label>{{ product.price | currency}}</label>
+            </div>
+            <div>  
+                <label><strong>Precio Venta: </strong></label><br>
+                <label>{{ product.sale_price | currency}}</label>
+            </div>
+            <div>  
+                <label><strong>Cantidad disponible: </strong></label><br>
+                <label>{{ product.in_storage }}</label>
+            </div>
+            <div>  
+                <label><strong>Fecha ultimo surtido de producto: </strong></label><br>
+                <label>{{ product.last_day_bougth | date:'short'}}</label>
+            </div>
+        </div>    
+    </div>    
+</form>
