@@ -8,11 +8,15 @@
             </div>
             <div>
                 <label for="name">Nombre Producto: </label>
-                <input ngModel name="name" id="name" type= "text" class = "form-control">         
+                <input ngModel [(ngModel)]="prodName" name="name" id="name" type= "text" class = "form-control">         
             </div>
             <br>
             <div>
-                <button class="btn btn-primary"  [disabled]="getFlag()" (click)="getProduct()">Borrar</button>
+                <button class="btn btn-primary" (click)="deleleProd()" [disabled] = "prodReturn" style="margin-right: 30px">Borrar</button>
+           
+                <button class="btn btn-primary"  (click)="findService()">Buscar</button>
+                <br>
+                <h3 *ngIf="success"> El producto se borro con exito</h3>
             </div>
         </div>
         <div class = "col-2" ></div>

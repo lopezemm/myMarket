@@ -23,4 +23,12 @@ export class ProductServiceService {
     return this.http.post(this.productUrl + 'addProduct', product, { headers });
   }
 
+  getProductByName(name){
+    return this.http.get(this.productUrl + 'searchProduct/' + name);
+  }
+
+  deleteProduct(product_code){
+    return this.http.post(this.productUrl + 'deleteProd/' + product_code, { headers });
+  }
+
 }

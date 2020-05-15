@@ -10,15 +10,21 @@ import { ProductServiceService } from '../services/product-service.service';
 })
 export class DeleteProductComponent {
   today: number = Date.now();
-  prodReturn = false;
+  prodReturn = true;
   product = {} as ProductInterface;
   barcode : string;
+  prodName : string;
+  success : boolean;
 
   constructor(private productService: ProductServiceService) { }
+  
 
-
-  getFlag(){
-    this.prodReturn = true;  
+  findService(){
+    if(this.barcode)
+      this.getProduct()
+    if(this.prodName)  
+      this.getProductByName()
+      this.prodName ="";       
   }
 
   async getProduct(){     
@@ -27,6 +33,7 @@ export class DeleteProductComponent {
           //response = JSON.stringify(response);
           //console.log(JSON.stringify(response));
           this.product = response;
+          this.prodReturn = false;  
           console.log(JSON.stringify(this.product));
          
           //this.product = response;
@@ -35,4 +42,21 @@ export class DeleteProductComponent {
        
   }
 
+  async getProductByName(){
+    let value = this.productService.getProductByName(this.prodName)
+        .subscribe((response: ProductInterface) => {          
+          this.product = response;
+          this.prodReturn = false;  
+          console.log(JSON.stringify(this.product));                   
+        });   
+  }
+
+  async deleleProd(){
+    let value = this.productService.deleteProduct(this.product.product_code)
+        .subscribe((response: any) =>{          
+          console.log(response);
+          this.success = (response.message === 'ok')? true : false;
+          this.product = {} as ProductInterface; this.prodReturn = true;  
+        });
+  }
 }
