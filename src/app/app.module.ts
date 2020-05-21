@@ -14,6 +14,7 @@ import { ProductServiceService } from './services/product-service.service';
 import { ManageproductsComponent } from './manageproducts/manageproducts.component';
 import { AddproductComponent } from './addproduct/addproduct.component';
 import { DeleteProductComponent } from './delete-product/delete-product.component';
+import { UpdateprodComponent } from './updateprod/updateprod.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DeleteProductComponent } from './delete-product/delete-product.componen
     AdminComponent,
     ManageproductsComponent,
     AddproductComponent,
-    DeleteProductComponent
+    DeleteProductComponent,
+    UpdateprodComponent
   ],
   imports: [
     HttpClientModule,
@@ -37,7 +39,7 @@ import { DeleteProductComponent } from './delete-product/delete-product.componen
       { path: 'admin', component: AdminComponent },
       { path: 'products/product/add', component: AddproductComponent},
       { path: 'products/product/del', component: DeleteProductComponent},
-      
+      { path: 'products/product/update', component: UpdateprodComponent}
     ])
   ],
   providers: [ProductServiceService],

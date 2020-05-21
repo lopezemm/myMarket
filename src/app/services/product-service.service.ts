@@ -31,4 +31,8 @@ export class ProductServiceService {
     return this.http.post(this.productUrl + 'deleteProd/' + product_code, { headers });
   }
 
+  updateProduct(product){
+    return this.http.post(this.productUrl + 'updateProd/', product, {headers});
+  }
+
 }
