@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, HostListener } from '@angular/core';
 import { ProductServiceService } from '../services/product-service.service';
+import { SaleModel } from '../model/sale-model';
 
 @Component({
   selector: 'app-sales',
@@ -14,16 +15,24 @@ export class SalesComponent implements OnInit  {
   price = 0;
   total = 0;
   name : String;
-  
+  tran : {};
+  salesArray: SaleModel[] = [];
+  sModel = new SaleModel();
+  jsonString : {};
 
   constructor(private changeDetector: ChangeDetectorRef, 
               private productService: ProductServiceService) { }
 
   ngOnInit(): void {    
   }
+  @HostListener('window:beforeunload') collectTransaction() {
+    //alert(this.salesWrapper)
+    console.log(this.salesArray.toString());
+  }
 
   onKey(event: KeyboardEvent) {
     //this.getBarcodeValue.concat(this.barcode).toString();
+    console.log('evento: ' + event.keyCode);
     event.preventDefault();
     this.changeDetector.detectChanges();
     this.input2.nativeElement.focus();
@@ -52,6 +61,10 @@ export class SalesComponent implements OnInit  {
       .subscribe((response: any) => {
         //response = JSON.stringify(response);
         console.log(JSON.stringify(response));
+        this.salesArray.push(this.sModel.toMap(response));
+        this.jsonString = '{"salesWrapper":' + JSON.stringify(this.salesArray)+ '}';
+        console.log(this.jsonString);
+        
         this.price = response.price;
         this.name = response.product_name;
         this.total += this.price;
