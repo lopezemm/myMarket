@@ -9,11 +9,12 @@ export class SaleModel{
     transactionid: String;
     
     toMap(pModel : ProductInterface){
-        this.barcode = pModel.product_code;
-        this.product_name = pModel.product_name;
-        this.price = pModel.price;
-        this.sale_price = pModel.sale_price
-        this.transactionid = "0";
-        return this;
+        let prodToArray = new SaleModel() 
+        prodToArray.barcode = pModel.product_code;
+        prodToArray.product_name = pModel.product_name;
+        prodToArray.price = pModel.price;
+        prodToArray.sale_price = pModel.sale_price
+        prodToArray.transactionid = "0";
+        return prodToArray;
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, HostListener } from '@angular/core';
 import { ProductServiceService } from '../services/product-service.service';
 import { SaleModel } from '../model/sale-model';
+import { SaleServiceService } from '../services/sale-service.service';
 
 @Component({
   selector: 'app-sales',
@@ -21,17 +22,17 @@ export class SalesComponent implements OnInit  {
   jsonString : {};
 
   constructor(private changeDetector: ChangeDetectorRef, 
-              private productService: ProductServiceService) { }
+              private productService: ProductServiceService,
+              private saleService: SaleServiceService) { }
 
   ngOnInit(): void {    
   }
   @HostListener('window:beforeunload') collectTransaction() {
-    //alert(this.salesWrapper)
+    this.sendTransaction();
     console.log(this.salesArray.toString());
   }
 
   onKey(event: KeyboardEvent) {
-    //this.getBarcodeValue.concat(this.barcode).toString();
     console.log('evento: ' + event.keyCode);
     event.preventDefault();
     this.changeDetector.detectChanges();
@@ -44,35 +45,36 @@ export class SalesComponent implements OnInit  {
     } else {
        this.getPriceValue();
        console.log('price '  + this.price)      
-    }
-    
+    }    
     console.log('total ' + this.total);
-    //this.barcode;
-    //if (this.barcode != undefined) {
-    //  this.getBarcodeValue.concat(this.barcode).toString();
-    //}
-    //console.log(this.getBarcodeValue);
-    //this.barcode = "";
-    //this.barcode = this.getBarcodeValue;    
-    //this.barcode = this.getBarcodeValue;
+   
   }
   private async getPriceValue(){
     let value = this.productService.getProduct(this.getBarcodeValue)
-      .subscribe((response: any) => {
-        //response = JSON.stringify(response);
+      .subscribe((response: any) => {        
         console.log(JSON.stringify(response));
         this.salesArray.push(this.sModel.toMap(response));
+        console.log("ASI VA EL ARRAY: ");
+        for (var product of this.salesArray) {
+          console.log(product)
+     }
         this.jsonString = '{"salesWrapper":' + JSON.stringify(this.salesArray)+ '}';
         console.log(this.jsonString);
         
         this.price = response.price;
         this.name = response.product_name;
-        this.total += this.price;
-        //this.product = response;
-        //console.log('aqui esta el valor: ' + this.product);
+        this.total += this.price;      
       });   
 
   }
+
+  private async sendTransaction(){
+    this.saleService.commitTransaction(this.jsonString)
+    .subscribe((response: any)=>{
+      console.log(response);
+    });
+  }
+
   open(event) {
     console.log("entor");
     //Hay que meter este codigo en  app.component.htlm para evitar mal focus
