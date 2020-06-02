@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
+  today : string;
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+     this.today = new Date().toLocaleDateString()
   }
 
 }
